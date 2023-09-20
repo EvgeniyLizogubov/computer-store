@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(callSuper = true)
-public class Laptop extends BaseEntity{
+public class Laptop extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "size", nullable = false)
     @NotNull
