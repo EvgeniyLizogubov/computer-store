@@ -1,9 +1,7 @@
 package com.github.evgenylizogubov.computerstore.error;
 
-import jakarta.validation.constraints.NotNull;
-
-public class NotFoundException extends RuntimeException {
-    public NotFoundException(@NotNull String message) {
+public class NotFoundException extends AppException {
+    public NotFoundException(String message) {
         super(message);
     }
 }

@@ -1,0 +1,29 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          batch_size:20
+        format_sql: true
+        default_batch_fetch_size: 20
+  datasource:
+    url: jdbc:h2:mem:computerstore
+    #    tcp: jdbc:h2:tcp://localhost:9092/mem:computerstore
+    username: sa
+    password:
+logging:
+  level:
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.transaction: DEBUG
+    org.springframework.web: DEBUG
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
