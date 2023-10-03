@@ -1,5 +1,6 @@
 package com.github.evgenylizogubov.computerstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.util.ProxyUtils;
 import org.springframework.util.Assert;
@@ -16,6 +18,7 @@ import org.springframework.util.Assert;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
 public abstract class BaseEntity implements Persistable<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +34,9 @@ public abstract class BaseEntity implements Persistable<Integer> {
     protected String manufacturer;
     
     @Column(name = "price", nullable = false)
-    @Size(min = 1)
+    @Min(1)
     @NotNull
-    protected Integer price;
+    protected int price;
     
     @Column(name = "amount_in_stock", nullable = false)
     @Min(0)
@@ -46,6 +49,7 @@ public abstract class BaseEntity implements Persistable<Integer> {
     }
     
     @Override
+    @JsonIgnore
     public boolean isNew() {
         return id == null;
     }
