@@ -35,7 +35,7 @@ public class PersonalComputerControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(PERSONAL_COMPUTER_MATCHER.contentJson(hp, apple, asus));
+                .andExpect(PERSONAL_COMPUTER_MATCHER.contentJson(hp, asus, apple));
     }
     
     @Test
