@@ -25,7 +25,7 @@ public abstract class BaseEntity implements Persistable<Integer> {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     protected Integer id;
     
-    @Column(name = "series_number", unique = true, nullable = false)
+    @Column(name = "series_number", nullable = false)
     protected Integer seriesNumber;
     
     @Column(name = "manufacturer", nullable = false)

@@ -59,7 +59,7 @@ public abstract class AbstractController<E extends BaseEntity, S extends BaseRep
     
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CacheEvict(value = {"entity", "entities"}, allEntries = true)
+    @CacheEvict(cacheResolver = CachingConfiguration.CACHE_RESOLVER_NAME, allEntries = true)
     public void update(@Valid @RequestBody E entity, @PathVariable int id) {
         log.info("{}: update {} with id={}", this.getClass().getSimpleName(), entity, id);
         assureIdConsistent(entity, id);
