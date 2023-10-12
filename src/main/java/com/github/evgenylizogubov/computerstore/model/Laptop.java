@@ -1,8 +1,15 @@
 package com.github.evgenylizogubov.computerstore.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import com.github.evgenylizogubov.computerstore.error.IllegalRequestDataException;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "laptop")
@@ -11,8 +18,17 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(callSuper = true)
 public class Laptop extends BaseEntity {
-    @Enumerated(EnumType.STRING)
-    @Column(name = "size", nullable = false)
-    @NotNull
-    private LaptopSize size;
+    @Transient
+    private final Set<Integer> sizes = new HashSet<>(Arrays.asList(13, 14, 15, 17));
+    
+    @Column(name = "size")
+    private int size;
+    
+    public void setSize(int size) {
+        if (sizes.contains(size)) {
+            this.size = size;
+        } else {
+            throw new IllegalRequestDataException("Invalid laptop size");
+        }
+    }
 }
