@@ -1,5 +1,6 @@
 package com.github.evgenylizogubov.computerstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.evgenylizogubov.computerstore.error.IllegalRequestDataException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +20,7 @@ import java.util.Set;
 @ToString(callSuper = true)
 public class Laptop extends BaseEntity {
     @Transient
+    @JsonIgnore
     private final Set<Integer> sizes = new HashSet<>(Arrays.asList(13, 14, 15, 17));
     
     @Column(name = "size")

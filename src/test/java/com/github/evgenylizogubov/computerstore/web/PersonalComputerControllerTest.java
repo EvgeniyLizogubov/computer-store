@@ -6,6 +6,7 @@ import com.github.evgenylizogubov.computerstore.util.JsonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -39,6 +40,7 @@ public class PersonalComputerControllerTest extends AbstractControllerTest {
     }
     
     @Test
+    @WithMockUser(roles = "ADMIN")
     void createWithLocation() throws Exception {
         PersonalComputer newPersonalComputer = getNew();
         ResultActions actions = perform(MockMvcRequestBuilders.post(REST_URL)
@@ -54,6 +56,7 @@ public class PersonalComputerControllerTest extends AbstractControllerTest {
     }
     
     @Test
+    @WithMockUser(roles = "ADMIN")
     void update() throws Exception {
         PersonalComputer updated = getUpdated();
         updated.setId(null);
@@ -66,3 +69,7 @@ public class PersonalComputerControllerTest extends AbstractControllerTest {
         PERSONAL_COMPUTER_MATCHER.assertMatch(repository.getExisted(APPLE_ID), getUpdated());
     }
 }
+
+
+
+

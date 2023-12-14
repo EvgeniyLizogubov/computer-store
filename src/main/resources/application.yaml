@@ -10,6 +10,7 @@ spring:
           batch_size: 20
         format_sql: true
         default_batch_fetch_size: 20
+    open-in-view: false
 
   datasource:
     url: jdbc:h2:mem:computerstore
@@ -35,3 +36,4 @@ server:
       enabled: true
       force: true
 
+springdoc.swagger-ui.path: /

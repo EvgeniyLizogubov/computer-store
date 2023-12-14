@@ -1,6 +1,16 @@
 --liquibase formatted sql
 
 --changeset Lizogubov Eugeny:init_schema
+create table USERS
+(
+    ID         INTEGER auto_increment primary key,
+    NAME       CHARACTER VARYING(128)        not null,
+    EMAIL      CHARACTER VARYING(128) unique not null,
+    PASSWORD   CHARACTER VARYING(128)        not null,
+    REGISTERED TIMESTAMP default NOW()       not null,
+    ROLE       CHARACTER VARYING(255)
+);
+
 create table HARD_DRIVE
 (
     AMOUNT_IN_STOCK INTEGER                not null,
@@ -53,6 +63,10 @@ create table PERSONAL_COMPUTER
 );
 
 --changeset Lizogubov Eugeny:populate_data
+-- INSERT INTO USERS (NAME, EMAIL, PASSWORD, ROLE)
+-- VALUES ('user', 'user@gmail.com', 'password', 'USER'),
+--        ('admin', 'admin@gmail.com', 'password', 'ADMIN');
+
 INSERT INTO PERSONAL_COMPUTER (SERIES_NUMBER, MANUFACTURER, PRICE, AMOUNT_IN_STOCK, FORM_FACTOR)
 VALUES (1000, 'HP', 100, 10, 'DESKTOP'),
        (2000, 'Asus', 200, 20, 'NETTOP'),
