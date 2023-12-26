@@ -15,7 +15,7 @@
 	<description>Test project of computer store</description>
 	<properties>
 		<java.version>20</java.version>
-		<springdoc.version>2.1.0</springdoc.version>
+		<springdoc.version>2.3.0</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,7 +42,6 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -99,5 +98,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

@@ -3,6 +3,7 @@ package com.github.evgenylizogubov.computerstore.web;
 import com.github.evgenylizogubov.computerstore.config.CachingConfiguration;
 import com.github.evgenylizogubov.computerstore.model.BaseEntity;
 import com.github.evgenylizogubov.computerstore.repository.BaseRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
@@ -34,6 +35,7 @@ public abstract class AbstractController<E extends BaseEntity, S extends BaseRep
     
     @GetMapping("/{id}")
     @Cacheable(cacheResolver = CachingConfiguration.CACHE_RESOLVER_NAME)
+    @Operation(summary = "Get by id")
     public E get(@PathVariable int id) {
         log.info("{}: get id = {}", entityTypeName, id);
         return repository.getExisted(id);
@@ -41,6 +43,7 @@ public abstract class AbstractController<E extends BaseEntity, S extends BaseRep
     
     @GetMapping
     @Cacheable(cacheResolver = CachingConfiguration.CACHE_RESOLVER_NAME)
+    @Operation(summary = "Get all")
     public List<E> getAll() {
         log.info("{}: getAll", entityTypeName);
         return repository.findAll(Sort.by("seriesNumber"));
@@ -49,6 +52,7 @@ public abstract class AbstractController<E extends BaseEntity, S extends BaseRep
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @CacheEvict(cacheResolver = CachingConfiguration.CACHE_RESOLVER_NAME, allEntries = true)
+    @Operation(summary = "Create new")
     public ResponseEntity<E> createWithLocation(@Valid @RequestBody E entity) {
         log.info("{}: createWithLocation {}", entityTypeName, entity);
         checkNew(entity);
@@ -63,6 +67,7 @@ public abstract class AbstractController<E extends BaseEntity, S extends BaseRep
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CacheEvict(cacheResolver = CachingConfiguration.CACHE_RESOLVER_NAME, allEntries = true)
+    @Operation(summary = "Update by id")
     public void update(@Valid @RequestBody E entity, @PathVariable int id) {
         log.info("{}: update {} with id={}", this.getClass().getSimpleName(), entity, id);
         assureIdConsistent(entity, id);

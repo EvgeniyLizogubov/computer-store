@@ -11,7 +11,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         servers = {@Server(url = "/", description = "Default Server URL")},
         info = @Info(
                 title = "REST Api documentation",
-                description = "Реализация REST Api приложения для магазина, торгующего компьютерами и комплектующими."
+                description = """
+                        Реализация REST Api приложения для магазина, торгующего компьютерами и комплектующими.
+                        
+                        Для создания новых записей и обновления существующих:
+                        > login: admin
+                        >
+                        > password: admin
+                        """
         )
 )
 public class ComputerStoreApplication {
