@@ -56,6 +56,15 @@ public class PersonalComputerControllerTest extends AbstractControllerTest {
     }
     
     @Test
+    void createUnauthorized() throws Exception {
+        PersonalComputer newPersonalComputer = getNew();
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newPersonalComputer)))
+                .andExpect(status().isUnauthorized());
+    }
+    
+    @Test
     @WithMockUser(roles = "ADMIN")
     void update() throws Exception {
         PersonalComputer updated = getUpdated();
